@@ -21,6 +21,7 @@ def migrate(cr, version):
         FROM ir_property AS ir
         WHERE 
             split_part(ir.res_id, ',', 1) = 'product.template'
+            AND ir.name = 'hs_code_id'
             AND pt.id = CAST(split_part(ir.res_id, ',', 2) AS Integer)
             AND CAST(split_part(ir.value_reference, ',', 2) AS Integer) IN (SELECT id FROM hs_code);
         """)
@@ -31,6 +32,7 @@ def migrate(cr, version):
         FROM ir_property AS ir
         WHERE 
             split_part(ir.res_id, ',', 1) = 'product.category'
+            AND ir.name = 'hs_code_id'
             AND pc.id = CAST(split_part(ir.res_id, ',', 2) AS Integer)
             AND CAST(split_part(ir.value_reference, ',', 2) AS Integer) IN (SELECT id FROM hs_code);
         """)
