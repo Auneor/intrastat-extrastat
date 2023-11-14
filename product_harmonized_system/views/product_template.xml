@@ -16,11 +16,11 @@
                     name="hs_code_id"
                     attrs="{'invisible': [('type', '=', 'service')]}"
                 />
-                <field
-                    name="origin_country_id"
-                    attrs="{'invisible': [('type', '=', 'service')]}"
-                    options="{'no_create': True}"
-                />
+<!--                <field-->
+<!--                    name="origin_country_id"-->
+<!--                    attrs="{'invisible': [('type', '=', 'service')]}"-->
+<!--                    options="{'no_create': True}"-->
+<!--                />-->
             </group>
         </field>
     </record>

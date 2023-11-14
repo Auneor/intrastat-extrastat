@@ -33,6 +33,13 @@ class IntrastatProductDeclaration(models.Model):
         )
     ]
 
+    def _gather_origin_country (self, inv_line, notedict, eu_countries):
+         if self.declaration_type == 'arrivals':
+             product_origin_country_id = self._get_partner_country(inv_line, notedict, eu_countries)
+         if self.declaration_type == 'dispatches':
+             product_origin_country_id = self.env.user.company_id.country_id
+         return product_origin_country_id
+
     @api.model
     def default_get(self, fields_list):
         res = super().default_get(fields_list)
@@ -685,8 +692,8 @@ class IntrastatProductDeclaration(models.Model):
                         inv_intrastat_line.product_origin_country_id
                     )
                 else:
-                    product_origin_country = self._get_product_origin_country(
-                        inv_line, notedict
+                    product_origin_country = self._gather_origin_country(
+                        inv_line, notedict, eu_countries
                     )
 
                 region_code = self._get_region_code(inv_line, notedict)
